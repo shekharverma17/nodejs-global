@@ -25,17 +25,18 @@ const schema = Joi.object({
 })
 
 
-userRoute.get('/', (req, res) => {
-    userServices.getAllUsers()
-        .then(users => {
-            res.json(users);
-        })
-        .catch(err => {
-            res.status(500).send(err);
-        });
-});
+// userRoute.get('/', (req, res) => {
+//     userServices.getAllUsers()
+//         .then(users => {
+//             res.json(users);
+//         })
+//         .catch(err => {
+//             res.status(500).send(err);
+//         });
+// });
 
 userRoute.get('/users', (req, res) => {
+    console.log('=====herer getAllUsers===2=======')
     userServices.getAllUsers()
         .then(users => {
             res.json(users);

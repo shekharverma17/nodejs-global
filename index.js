@@ -2,6 +2,9 @@
 import express  from 'express'
 import bodyParser from 'body-parser'
 import userRoute  from './api/routes/user.js';
+import groupRoute  from './api/routes/group.js';
+import addUsersToGroup  from './api/routes/userGroup.js';
+
 const router = express.Router();
 
 // App
@@ -13,5 +16,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-app.use('/api', userRoute);
+app.use('/api/users', userRoute);
+app.use('/api/groups', groupRoute);
+app.use('/api/addUserToGroup', addUsersToGroup);
+
 app.listen('3000')

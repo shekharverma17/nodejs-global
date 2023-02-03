@@ -1,4 +1,5 @@
 import User from '../models/user.js'
+import userGroupTransaction from '../models/transaction.js'
 const userServices = {
     getAllUsers: () => {
         return User.findAll({});
@@ -21,12 +22,7 @@ const userServices = {
             });
     },
     deleteUser: async (id) => {
-
-        User.findByPk(id)
-            .then((user) => {
-                return user.update({ isDeleted: true })
-            })
-            .then((updatedUser) => {
+        await userGroupTransaction(id, User).then((updatedUser) => {
                 console.log("User deleted successfully: ", updatedUser);
             })
             .catch((error) => {
