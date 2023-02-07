@@ -1,5 +1,5 @@
 import UserGroup from '../models/userGroup.js'
-import UserGroupModel from '../models/userGroup'
+
 interface IUserGroup {
     userId: string,
     groupId: string,

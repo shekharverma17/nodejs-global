@@ -1,6 +1,6 @@
 import User from '../models/user'
 import userGroupTransaction from '../models/transaction.js'
-import {IUser, IUsers } from './user.interface'
+import {IUser } from './user.interface'
 import { UserModelType } from '../models/user.type'
 const userServices = {
     getAllUsers: async (): Promise<UserModelType[]> => {

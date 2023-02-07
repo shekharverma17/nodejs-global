@@ -1,5 +1,4 @@
 import Group from '../models/group'
-import UserGroup from '../models/userGroup'
 import userGroupTransaction from '../models/transaction'
 import { GroupModel } from '../models/group.type'
 

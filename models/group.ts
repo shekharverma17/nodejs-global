@@ -1,6 +1,4 @@
-
 import { getSequelizeInstance } from './connect';
-import { DataTypes, Sequelize } from 'sequelize';
 import { GroupModel } from './group.type'
 const seq =  getSequelizeInstance();
 
