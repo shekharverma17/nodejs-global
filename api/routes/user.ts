@@ -1,10 +1,21 @@
 // Layer 1: Routes
 import { Router } from 'express';
 import { v4 as uuidv4 } from 'uuid'
-import Joi from 'joi'
+import * as Joi from 'joi'
 
 import userServices from '../../services/user.service.js'
 const userRoute = Router();
+
+interface User {
+    login: string,
+    password: string,
+    age: number,
+    isDeleted: boolean,
+}
+
+interface Users {
+    users: User[]
+}
 
 const schema = Joi.object({
     login: Joi.string()
@@ -35,8 +46,7 @@ const schema = Joi.object({
 //         });
 // });
 
-userRoute.get('/users', (req, res) => {
-    console.log('=====herer getAllUsers===2=======')
+userRoute.get('/', (req, res) => {
     userServices.getAllUsers()
         .then(users => {
             res.json(users);
@@ -56,7 +66,7 @@ userRoute.get('/:id', function (req, res) {
         });
 });
 
-userRoute.post('/users', function (req, res) {
+userRoute.post('/', function (req, res) {
     const result = schema.validate(req.body);
     if (result.error) {
         throw new Error(result.error.details[0].message);

@@ -1,7 +1,7 @@
 // Layer 1: Routes
 import { Router } from 'express';
-import { v4 as uuidv4 } from 'uuid'
-import Joi from 'joi'
+import * as Joi from 'joi'
+
 import userGroupServices from '../../services/userGroup.service.js'
 const userGroupRoute = Router();
 

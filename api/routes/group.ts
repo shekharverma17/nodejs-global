@@ -1,8 +1,10 @@
 // Layer 1: Routes
 import { Router } from 'express';
 import { v4 as uuidv4 } from 'uuid'
-import Joi from 'joi'
+import * as Joi from 'joi'
 import groupServices from '../../services/group.service.js'
+import { GroupModel } from '../../models/group.type'
+
 const groupRoute = Router();
 
 const schema = Joi.object({
@@ -13,13 +15,7 @@ const schema = Joi.object({
         .required(),
     permissions: Joi.array().items(Joi.string().valid("READ", "WRITE", "DELETE","SHARE", "UPLOAD_FILES")).required()
 })
-const userGroupSchema = Joi.object({
-    userId: Joi.string().guid({ version: 'uuidv4' }).required(),
-    groupId: Joi.string().guid({ version: 'uuidv4' }).required()
-})
-
 groupRoute.get('/', (req, res) => {
-    console.log('herer groupRoute==========')
     groupServices.getAllGroups()
         .then(group => {
             res.json(group);
@@ -51,21 +47,8 @@ groupRoute.post('/', function (req, res) {
         permissions: req.body.permissions
     };
 
-    const newGroup = groupServices.createGroup(newItem);
+    const newGroup = groupServices.createGroup(newItem as GroupModel);
     res.status(200).json(newGroup);
-});
-
-groupRoute.post('addUsersToGroup/', function (req, res) {
-    const result = userGroupSchema.validate(req.body);
-    if (result.error) {
-        throw new Error(result.error.details[0].message);
-    }
-    groupServices.addUsersToGroup(req.body.userId,req.body.groupId).then(group => {
-        res.status(200).json(group);
-        })
-        .catch(err => {
-            res.status(500).send(err);
-        });
 });
 
 // UPDATE

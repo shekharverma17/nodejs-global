@@ -1,6 +1,6 @@
 // Import packages
-import express  from 'express'
-import bodyParser from 'body-parser'
+import * as express  from 'express'
+import * as bodyParser from 'body-parser'
 import userRoute  from './api/routes/user.js';
 import groupRoute  from './api/routes/group.js';
 import addUsersToGroup  from './api/routes/userGroup.js';

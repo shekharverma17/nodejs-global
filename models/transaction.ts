@@ -1,9 +1,12 @@
 // Start the transaction
-import Sequelize from 'sequelize'
-import UserGroup from './userGroup.js'
-const sequelize = new Sequelize('postgres://jcpjkark:s2K2UvN8z4PY2nWhGpTKELLbrWYsV4Sq@manny.db.elephantsql.com/jcpjkark') // Example for postgres
+import { getSequelizeInstance } from './connect';
+const sequelize =  getSequelizeInstance();
 
-const userGroupTransaction = async (recordId, Model)=>{
+import UserGroup from './userGroup.js'
+import { GroupModel } from './group.type'
+import { UserModelType } from './user.type'
+
+const userGroupTransaction = async (recordId: string, Model: (GroupModel | UserModelType) )=>{
     const transaction = await sequelize.transaction();
 
     try {
